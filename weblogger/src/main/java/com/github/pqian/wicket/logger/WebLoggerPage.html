@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wicket="http://wicket.apache.org">
 <head>
 <meta charset="UTF-8">
-<title>WebLogger</title>
+<title>WebLogger - Log Viewer</title>
+<style type="text/css">
+body, table, form, input, td, th, p, textarea, select {
+	font-family: Verdana, Helvetica, sans serif;
+	font-size: 11px;
+}
+body {
+	margin-bottom: 50px;
+}
+pre {
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+	margin: 0;
+}
+</style>
 </head>
 <body>
-<h1>WebLogger View</h1>
-<pre wicket:id="buffer" style="display:none"></pre>
+	<h1>Log Viewer</h1>
+	<div wicket:id="buffer">
+		<pre wicket:id="data" style="display:none"></pre>
+	</div>
 </body>
 </html>
