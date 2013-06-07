@@ -19,6 +19,24 @@ pre {
 	word-wrap: break-word;
 	margin: 0;
 }
+#scrollLockIcon {
+	position: fixed;
+	bottom: 60px;
+	right: 20px;
+	z-index: 999999998;
+	cursor: pointer;
+	border: 0px;
+	-webkit-transition: opacity 0.5s ease;
+	visibility: visible;
+	width: 36px;
+	height: 34px;
+	max-height: 36px;
+	max-width: 34px;
+	overflow: hidden;
+	display: block;
+	padding: 0px;
+	opacity: 0.4;
+}
 </style>
 </head>
 <body>
@@ -26,5 +44,11 @@ pre {
 	<div wicket:id="buffer">
 		<pre wicket:id="data" style="display:none"></pre>
 	</div>
+	<script type="text/javascript">
+		var scrollLocked=false;
+	</script>
+	<img id="scrollLockIcon" title="scroll lock" 
+	onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity=0.4;" onclick="scrollLocked=!scrollLocked;" 
+	src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAiCAQAAACdULMOAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfdBgcUJDJS89PCAAADDElEQVRIx63VTYhVZRgH8N8599zLvc7YzJiziAwzocIW6iLaRPZFm8g2RUhulSICaZNQi1pYEdKHkRBBLYoKbFMuapN9mBMxEwSK6MImtCypFk7qjPfjfVvcM/fec2eu4EzP4Z5zOee8//M8///z/N8kaJiOFwRLi0TFuOuS5LKpOCYOeC32LVo8giHJ8RgFlFSkkvzl9jXpWxpy8Jhfg7ommJXNWIFMqk4OlXZ+8nPsHKHnHEVldVSlTUFQEwcmfmWGSgiCNIpKZi01GhJRbAMFy4k4DxR6gMpet9PFKyyreNVRrzjWI0GntK7ILzuoaqMhiZWuURINq0qw0ohM6mtnfeXP/oyC0AN0wnrvOqRhn2uN2qZmtducsdeoUY+pdXTtAnUy6pa233k3OOCM1/zsFzc6pe4Ja7zhe6f9Yf8AjrIodPATdQdN22KNda436y2zuN9J3GzOFielC4AC/WTf7TnHsNW093xjtVOINuEdE963dYHGbbKz2MNR9KPtjvjYkEOeMucFa21WdckPdrponzttMGqDkb6Mki9jTWZVfiuVKWlJev6V5nURNQSJkBMcEZ1Xp5gRtISchVY+NrHnSbuU4pp2Rlmxj5ba2TlQ+B+A0lBQ7ag9soHjuU1tUVvLVest7Zzv8p5aoaKujrKapguCCZmq2OcVeUZF4uY9cdJaYza6rOUOw8Z8LkXVrT4qOFfSO7T9HA3bYY9zHvGQvcb95QtTmnjGZo8XxIm9NtKvWuZfD7rkYX+b8KiGTd6U4gPb+wpLukMbChnN+MS3bve0SU+6zy7POuxFN4n40A7/LDJrQRoKZI9Z7zOTPpXY7S5vu9duz/vJEalb3GOXl1QWmf7kQCyrWJffKnW2pJKyVu49ZU0tMe/2do931T5ttjv9SSHN9gw1ejoodPa1hdK012Rh2SPS/nBKVO+r+uqi1d2OWs4uMauoZbZrtfwuNa4pzbftNuXzR7HvQ24uUTTnRG402YgZ8KvfBo7r4KIa+WeiZDoevmqAhTEiiY7HKaVl+dEqDyT/AaJMcZ33RTfrAAAAAElFTkSuQmCC">
 </body>
 </html>

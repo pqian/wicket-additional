@@ -76,15 +76,17 @@ public class WebLoggerPage extends WebPage
                     {
                         final String id = buffer.getMarkupId();
                         final String js = "" //
-                                + "setTimeout(function() {" // delay 0.5 s to show indicator, our server response is too fast ;-)
+                                + "setTimeout(function() {" //
                                 + "    var buffer=$('#" + id + "');" // find buffer area
                                 + "    var data=$('pre',buffer);" //  find buffer data area
                                 + "    if (data.is(':empty')) return;" // skip if no new log retrieved
                                 + "    var pre=$('<pre></pre>').html(data.html());" // create new pre tag for new log
                                 + "    data.empty();" // clear buffer data
                                 + "    pre.insertBefore(buffer);" // insert new log
-                                + "    $('body').animate({ scrollTop: $(document).height() }, 1000);" // scroll down to bottom
-                                + "}, 1000);"; // delay 500 ms
+                                + "    if (!scrollLocked) {" //
+                                + "        $('body').animate({ scrollTop: $(document).height() }, 1000);" // scroll down to bottom
+                                + "    }" //
+                                + "}, 1000);"; // delay 1s to show indicator, our server response is too fast ;-)
                         return js;
                     }
 
