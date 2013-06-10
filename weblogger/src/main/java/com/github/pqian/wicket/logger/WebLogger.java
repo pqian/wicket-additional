@@ -2,12 +2,12 @@ package com.github.pqian.wicket.logger;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebLogger {
 
-	private static final Set<LogViewer> LOG_VIEWERS = new HashSet<LogViewer>();
+	private static final Map<String, LogViewer> LOG_VIEWERS = new HashMap<String, LogViewer>();
 
     private static class WriterHolder
     {
@@ -19,14 +19,19 @@ public class WebLogger {
         return WriterHolder.WRITER;
     }
 
-    public static void addLogViewer(final LogViewer logViewer)
+    public static LogViewer getLogViewer(String sessionId, boolean create)
     {
-        LOG_VIEWERS.add(logViewer);
+    	LogViewer ret = LOG_VIEWERS.get(sessionId);
+    	if (ret == null && create) {
+    		ret = new LogViewer(new StringBuilder());
+    		LOG_VIEWERS.put(sessionId, ret);
+    	}
+    	return ret;
     }
 
-    public static void removeLogViewer(final LogViewer logViewer)
+    public static void removeLogViewer(String sessionId)
     {
-        LOG_VIEWERS.remove(logViewer);
+        LOG_VIEWERS.remove(sessionId);
     }
 
     private static class Dispatcher implements Appendable
@@ -35,7 +40,7 @@ public class WebLogger {
         @Override
         public Appendable append(final CharSequence csq, final int start, final int end) throws IOException
         {
-            for (final LogViewer viewer : LOG_VIEWERS)
+            for (final LogViewer viewer : LOG_VIEWERS.values())
             {
                 viewer.append(csq, start, end);
             }
@@ -45,7 +50,7 @@ public class WebLogger {
         @Override
         public Appendable append(final char c) throws IOException
         {
-            for (final LogViewer viewer : LOG_VIEWERS)
+            for (final LogViewer viewer : LOG_VIEWERS.values())
             {
                 viewer.append(c);
             }
@@ -55,7 +60,7 @@ public class WebLogger {
         @Override
         public Appendable append(final CharSequence csq) throws IOException
         {
-            for (final LogViewer viewer : LOG_VIEWERS)
+            for (final LogViewer viewer : LOG_VIEWERS.values())
             {
                 viewer.append(csq);
             }

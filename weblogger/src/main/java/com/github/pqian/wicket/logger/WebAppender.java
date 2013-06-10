@@ -11,7 +11,7 @@ public class WebAppender extends WriterAppender {
 	    public WebAppender(final Layout layout)
 	    {
 	        setLayout(layout);
-	        activateOptions();
+	        //activateOptions();
 	    }
 
 	    @Override

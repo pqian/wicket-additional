@@ -18,8 +18,6 @@ public class WebLoggerPage extends WebPage
 {
     private static final long serialVersionUID = 1L;
 
-    private LogViewer logViewer;
-
     public WebLoggerPage()
     {}
 
@@ -32,9 +30,7 @@ public class WebLoggerPage extends WebPage
     protected void onInitialize()
     {
         super.onInitialize();
-        logViewer = new LogViewer(new StringBuilder());
-        WebLogger.addLogViewer(logViewer);
-
+        
         final IndicatingAjaxBuffer buffer = new IndicatingAjaxBuffer("buffer");
         add(buffer.setOutputMarkupId(true));
 
@@ -45,9 +41,11 @@ public class WebLoggerPage extends WebPage
             @Override
             public String getObject()
             {
+            	LogViewer logViewer = WebLogger.getLogViewer(getSession().getId(), true);
                 final Appendable oldBuffer = logViewer.getAndSet(new StringBuilder());
                 return oldBuffer.toString();
             }
+         
         });
         buffer.add(data);
 
@@ -78,7 +76,7 @@ public class WebLoggerPage extends WebPage
                         final String js = "" //
                                 + "setTimeout(function() {" //
                                 + "    var buffer=$('#" + id + "');" // find buffer area
-                                + "    var data=$('pre',buffer);" //  find buffer data area
+                                + "    var data=$('div',buffer);" //  find buffer data area
                                 + "    if (data.is(':empty')) return;" // skip if no new log retrieved
                                 + "    var pre=$('<pre></pre>').html(data.html());" // create new pre tag for new log
                                 + "    data.empty();" // clear buffer data
@@ -90,18 +88,13 @@ public class WebLoggerPage extends WebPage
                         return js;
                     }
 
-                    @Override
-                    public CharSequence getBeforeSendHandler(final Component component)
-                    {
-                        return "" + super.getBeforeSendHandler(component);
-                    }
                 };
                 attributes.getAjaxCallListeners().add(ajaxCallListener);
             }
 
         });
     }
-
+    
     private class IndicatingAjaxBuffer extends WebMarkupContainer implements IAjaxIndicatorAware
     {
         private static final long serialVersionUID = 1L;

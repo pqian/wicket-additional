@@ -4,29 +4,29 @@
 		<groupId>com.github.pqian.wicket</groupId>
 		<artifactId>wicket-additional-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.pqian.wicket</groupId>
-	<artifactId>wicket-additional-weblogger</artifactId>
+	<artifactId>wicket-additional-examples</artifactId>
+	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<dependencies>
 		<dependency>
+			<groupId>com.github.pqian.wicket</groupId>
+			<artifactId>wicket-additional-weblogger</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-extensions</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
